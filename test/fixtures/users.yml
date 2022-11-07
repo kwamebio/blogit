@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+kwame:
+  password_digest: <%= Bcrypt::Pasword.create("kbad1234", cost: 4) %>
+  name: Kwame Bio
+  email: kwameagyemang73@gmail.com
+
+Kwaku:
+  password_digest: <%= BCrypt::Password.create("passwrd", cost: 4) %>
+  name: Kwaku Duah
+  email: kwakuduah@gmail.com

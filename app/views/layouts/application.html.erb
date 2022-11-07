@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Blogit</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body>
+    <div id="content">
+      <div id="login_logout">
+        <% if @current_user %>
+          Logged in as:
+          <%= @current_user.name %>
+          <em><%= link_to "(Logout)", session_path,
+            method: :delete %></em>
+            <% else %>
+          <em>Not logged in.</em>
+          <%= link_to 'Login', new_session_path%>
+        <% end %>
+      </div>
+
+      <h1>Blogit</h1>
+      <% unless flash[:notice].blank? %>
+        <div id="notification"><%= flash[:notice] %></div>
+      <% end %>      
+      <%= yield %>
+    </div>
+
+    <ul id="navigation">
+      <li><%= link_to 'Front page blogs', blogs_path %></li>
+      <li><%= link_to 'Upcoming blogs', bin_blogs_path%>
+      <li><%= link_to 'Submit a new blog', new_blog_path %></li>
+    </ul>
+
+  </body>
+</html>

@@ -1,0 +1,46 @@
+<h2><%= @blog.name %></h2>
+<p><%= link_to @blog.link, @blog.link %></p>
+
+<% if logged_in? %>
+  <div id="vote_form">
+    <%= form_for [@blog, Vote.new], remote: true do %>
+      <%= submit_tag 'vote' %>
+        <% end %>
+  </div>
+<% else %>
+  <p>
+    <em>
+      You would be able to vote for this story if you were 
+      <%= link_to 'logged in', new_session_path %>!
+    </em>
+  </p>
+<% end %>
+<h2>
+  <span id="vote_score">
+    Score: <%= @blog.votes.size %>
+  </span>
+  <%= @blog.name %>
+</h2>
+<ul id="vote_history">
+  <% if @blog.votes.empty? %>
+    <em> No votes yet! </em>
+  <% else %>
+    <%= render partial:'votes/vote',
+      collection: @blog.votes %>
+  <% end %>
+</ul>
+<p>
+  <%=@blog.description %>
+</p>
+<p class="submitted_by">
+  Submitted by:
+  <span><%= @blog.user_id %></span>
+</p>
+<p>
+  <%= link_to @blog.link, @blog.link%>
+</p>
+<div id="vote_form">
+  <%= form_tag blog_votes_path(@blog), remote: true do %>
+    <%= submit_tag 'Vote for it' %>
+  <% end %>
+</div>

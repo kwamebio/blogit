@@ -1,0 +1,33 @@
+
+<%= form_for @blog do |f| %>
+  <div>
+    <p><%= f.label :name  %></p>
+    <%= f.text_field :name %>
+  </div>
+    <div>
+      <p><%= f.label :link %></p>
+      <%= f.text_field :link %>
+    </div>
+    <%= submit_tag %>
+
+    <% if @blog.errors.any? %>
+      <div class="form_errors">
+        <h3>Errors</h3>
+        <ul>
+          <% @blog.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <%end%>
+
+<div>
+  <p><%= f.label :description %></p>
+<%= f.text_area :description %>
+</div>
+<div>
+  <p><%= submit_tag %></p>
+</div>
+
+        
+<% end %>
